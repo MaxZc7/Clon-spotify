@@ -14,7 +14,7 @@ Posibilidades:
 
 -Controlar el volumen
 
--Ver las paylist y sus musicas
+-Ver las playlists y sus musicas
 
 --
 
