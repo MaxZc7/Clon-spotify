@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
-import { usePlayerStore } from '@/store/playerStore';
+import { usePlayerStore } from '../store/playerStore';
 import { Slider } from './Slider';
 
 export const PauseIcon = () => (

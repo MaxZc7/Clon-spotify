@@ -1,0 +1,87 @@
+---
+import Layout from '@/layouts/Layout.astro';
+const { id } = Astro.params;
+import { allPlaylists, songs } from '@/lib/data';
+import TableMusics from '@/components/TableMusics.astro';
+
+const playlist = allPlaylists.find((playlistT) => playlistT.id == id);
+const playlistSongs = songs.filter((song) => song.albumId == playlist?.albumId);
+
+function duracionASegundos(durationString: any) {
+  var tiempo = durationString.split(':');
+  var minutos = parseInt(tiempo[0]);
+  var segundos = parseInt(tiempo[1], 10);
+
+  return minutos * 60 + segundos;
+}
+
+var total_segundos = 0;
+
+playlistSongs.forEach(function (e) {
+  var duracion_str = e.duration;
+  total_segundos += duracionASegundos(duracion_str);
+});
+
+function formatedTime(value: any) {
+  const mins = Math.floor(value / 60)
+    .toString()
+    .padStart(2, '0');
+  const segs = Math.floor(value % 60);
+
+  return `${mins}:${segs}`;
+}
+
+const totalTime = formatedTime(total_segundos);
+---
+
+<Layout title=`${playlist?.title}`>
+  <div
+    class="relative transition-all duration-1000"
+    transition:name=`playlist ${id} xax`
+  >
+    <header class="flex gap-4 p-6">
+      <picture class="aspect-square relative z-10 w-52 h-52 flex-none mt-16">
+        <img
+          src={playlist?.cover}
+          alt={`Cover of ${playlist?.title}`}
+          class="rounded-md object-cover h-full w-full hover:scale-105 transition-all duration-200"
+          transition:name=`playlist ${playlist?.id} image`
+        />
+      </picture>
+
+      <div class="flex flex-col justify-between text-white z-10">
+        <h2 class="flex flex-1 items-end">Playlist</h2>
+        <div>
+          <h1 class="font-bold block text-5xl">
+            {playlist?.title}
+            <span transition:name=`playlist ${playlist?.id} title`> </span>
+          </h1>
+        </div>
+
+        <div class="flex-1 flex items-end">
+          <div class="text-sm text-gray-300 font-normal">
+            <div transition:name=`playlist ${playlist?.id} artists`>
+              <span>{playlist?.artists.join(', ')}</span>
+            </div>
+            <p class="mt-1">
+              <span>{playlistSongs.length} canciones</span>, {
+                totalTime != '00:0' ? totalTime : '-:--'
+              }
+            </p>
+          </div>
+        </div>
+      </div>
+    </header>
+    <div class="relative z-10 px-6"></div>
+
+    <div class="relative z-10"></div>
+    <div
+      class="absolute inset-0 bg-gradient-to-t from-zinc-900 via-zinc-900/75 -z-10"
+    >
+    </div>
+  </div>
+
+  <div class="p-6">
+    <TableMusics songs={playlistSongs} />
+  </div>
+</Layout>

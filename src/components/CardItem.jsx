@@ -1,4 +1,4 @@
-import { usePlayerStore } from '@/store/playerStore';
+import { usePlayerStore } from '../store/playerStore';
 
 import { PauseIcon, PlayIcon } from './Player';
 export default function CardItem({ PlaylistId }) {

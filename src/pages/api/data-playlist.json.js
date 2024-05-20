@@ -1,4 +1,4 @@
-import { playlists, allPlaylists, songs as allSongs } from '@/lib/data';
+import { playlists, allPlaylists, songs as allSongs } from '../../lib/data';
 
 export function GET({ params, request }) {
   const { url } = request;

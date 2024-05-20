@@ -1,8 +1,8 @@
 ---
-import Layout from '@/layouts/Layout.astro';
+import Layout from '../../layouts/Layout.astro';
 const { id } = Astro.params;
-import { allPlaylists, songs } from '@/lib/data';
-import TableMusics from '@/components/TableMusics.astro';
+import { allPlaylists, songs } from '../../lib/data';
+import TableMusics from '../../components/TableMusics.astro';
 
 const playlist = allPlaylists.find((playlistT) => playlistT.id == id);
 const playlistSongs = songs.filter((song) => song.albumId == playlist?.albumId);
