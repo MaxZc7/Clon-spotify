@@ -1,3 +1,5 @@
-Clon spotify | inspirado en el trabajo de @midudev
+Clon spotify | Creado con astro, react y svelte
 
--Play music
+Posibilidades:
+
+-Reproducir musica 
