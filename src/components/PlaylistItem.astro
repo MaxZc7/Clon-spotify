@@ -1,0 +1,47 @@
+---
+import type { Playlist } from '@/lib/data';
+import CardItem from '@/components/CardItem';
+
+interface Props {
+  playlist: Playlist;
+}
+
+const { playlist } = Astro.props;
+const { id, albumId, artists, color, cover, title } = playlist;
+---
+
+<article
+  class="relative group mr-3 bg-[#31323484] hover:bg-[#37383ac3] rounded-lg shadow-xl transition-all duration-300"
+>
+  <div
+    class="z-20 absolute flex transition-all duration-300 bottom-20 right-4 translate-y-3 opacity-0 group-hover:translate-y-0 group-hover:opacity-100"
+  >
+    <CardItem PlaylistId={id} client:visible />
+  </div>
+  <a
+    href={`playlist/${id}`}
+    class="flex relative gap-3 flex-col overflow-hidden p-2 w-44"
+    transition:name=`playlist ${id} xax`
+  >
+    <picture class="aspect-square w-full h-auto flex-none">
+      <img
+        src={cover}
+        alt={`Cover of ${title}`}
+        class="rounded-md"
+        transition:name=`playlist ${id} image`
+      />
+    </picture>
+
+    <div class="text-white">
+      <h4 transition:name=`playlist ${playlist?.id} title`>
+        {title}
+      </h4>
+      <span
+        class="text-[#a7a7a7] text-sm"
+        transition:name=`playlist ${id} artists`
+      >
+        {artists}
+      </span>
+    </div>
+  </a>
+</article>

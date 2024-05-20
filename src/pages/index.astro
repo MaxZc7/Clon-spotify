@@ -1,0 +1,22 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { playlists } from '@/lib/data';
+import PlaylistItem from '@/components/PlaylistItem.astro';
+import Saludos from '@/components/Saludos.svelte';
+---
+
+<Layout title="Clon Spotify By Max">
+  <div class="relative transition-all duration-1000 bg-green-600">
+    <div class="relative z-10 px-6">
+      <Saludos />
+      <div class="flex">
+        {playlists.map((playlistT) => <PlaylistItem playlist={playlistT} />)}
+      </div>
+    </div>
+
+    <div
+      class="absolute inset-0 bg-gradient-to-t from-zinc-900 via-zinc-900/75"
+    >
+    </div>
+  </div>
+</Layout>

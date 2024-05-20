@@ -1,0 +1,51 @@
+---
+import TablePlay from './TablePlay';
+import TimeIcon from '@/icons/Time.astro';
+import type { Song } from '@/lib/data';
+interface Props {
+  songs: Song[];
+}
+const { songs } = Astro.props;
+---
+
+<table class="table-auto divide-y min-w-full divide-gray-600">
+  <thead class="text-white">
+    <td class="px-4 py-1">#</td>
+    <td class="px-4 py-1">Title</td>
+    <td class="px-4 py-1">Album</td>
+
+    <td class="px-4 py-1"
+      ><div class="pl-1">
+        <TimeIcon />
+      </div></td
+    >
+  </thead>
+  <tbody>
+    <tr class="h-[14px]"></tr>
+    {
+      songs.map((song, index) => (
+        <tr class="text-white border-spacing-0 hover:bg-[#2A2A2A] group">
+          <td class="px-4 py-2 w-12 ">
+            <span class="group-hover:hidden">{index + 1}</span>
+            <div class="hidden group-hover:block">
+              <TablePlay albumId={song.albumId} songId={song.id} client:load />
+            </div>
+          </td>
+
+          <td class="flex gap-3 px-4 py-2">
+            <picture>
+              <img src={song.image} alt="" class="w-12 h-12 rounded-md" />
+            </picture>
+            <div>
+              <h4>{song.title}</h4>
+              <span>{song.artists.join(',')}</span>
+            </div>
+          </td>
+          <td class="px-4 py-2">{song.album}</td>
+          <td class="px-4 py-2">{song.duration}</td>
+        </tr>
+      ))
+    }
+  </tbody>
+</table>
+<tfoot></tfoot>

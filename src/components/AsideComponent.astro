@@ -1,0 +1,38 @@
+---
+import HomeIcon from '../icons/Home.astro';
+import SearchIcon from '../icons/Search.astro';
+import LibraryIcon from '../icons/Library.astro';
+
+import AsideItems from './AsideItems.astro';
+import AsideCard from './AsideCard.astro';
+import { playlists } from '@/lib/data';
+---
+
+<nav class="flex gap-2 flex-col flex-1">
+  <div class="p-2 bg-[#121212] rounded-lg">
+    <ul class="">
+      <AsideItems href={'/'}>
+        <HomeIcon />
+        Inicio
+      </AsideItems>
+
+      <AsideItems href={'/'}>
+        <SearchIcon />
+        Buscar
+      </AsideItems>
+    </ul>
+  </div>
+
+  <div class="p-2 bg-[#121212] rounded-lg flex-1">
+    <ul>
+      <AsideItems href={'/'}>
+        <LibraryIcon />
+        Tu Biblioteca
+      </AsideItems>
+    </ul>
+
+    <div class="">
+      {playlists.map((playlistT: any) => <AsideCard playlist={playlistT} />)}
+    </div>
+  </div>
+</nav>
